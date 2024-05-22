@@ -3,8 +3,7 @@
 This branch [13-describe-the-analysis-workflow-using-imce-process-vocabularies](https://github.com/UTNAK/kepler16b-using-imce-vocabulary/tree/13-describe-the-analysis-workflow-using-imce-process-vocabularies) investigate how might we describe the analysis workflow using IMCE project and analysis vocabularies.
 
 
-![process concept](img/image-1.png)
-
+![IMCE Process Vocabularies](img/image-1.png)
 
 
 # OML Kepler 16b example with IMCE Vocabularies
