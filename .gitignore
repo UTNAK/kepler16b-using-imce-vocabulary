@@ -18,6 +18,7 @@ __pycache__/
 # quarto
 /.quarto/
 
+
 # History files
 .Rhistory
 .Rapp.history
@@ -81,3 +82,11 @@ rsconnect/
 .Rhistory
 src/analysis/.Rhistory
 gradle/wrapper/gradle-7.6-bin.zip
+gradle/wrapper/gradle-wrapper.properties
+
+
+#src/quarto/ModelingNote.qmd
+#src/quarto/image.md
+#src/quarto/ModelingNote.html
+#src/quarto/img/
+
