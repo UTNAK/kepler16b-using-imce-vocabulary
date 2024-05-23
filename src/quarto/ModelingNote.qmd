@@ -119,3 +119,35 @@ that calcurate the deltaV and fuelMass.
     -   case-B: Using R to calcurate dV and fuelMass.
 
 4.  
+
+
+
+## Get edges
+
+```sparql
+PREFIX base:        <http://imce.jpl.nasa.gov/foundation/base#>
+PREFIX mission:     <http://imce.jpl.nasa.gov/foundation/mission#>
+PREFIX project:     <http://imce.jpl.nasa.gov/foundation/project#>
+PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT  ?dIri_localname ?dIri ?if1 ?if2 ?from ?to
+WHERE {
+
+	?dIri a project:Deliverable ;
+      project:isDeliveredBy ?if1 ;
+      project:isReceivedBy ?if2 .
+      OPTIONAL{
+        ?if1 project:isInterchangePointFor ?c1.
+      }
+      OPTIONAL{
+        ?if2 project:isInterchangePointFor ?c2.
+      }
+
+  BIND(STRAFTER(STR(?dIri), "#") AS ?dIri_localname) .
+  BIND(STRAFTER(STR(?c1), "#") AS ?from) .
+  BIND(STRAFTER(STR(?c2), "#") AS ?to) .
+
+}
+ORDER BY ?j1
+
+```
