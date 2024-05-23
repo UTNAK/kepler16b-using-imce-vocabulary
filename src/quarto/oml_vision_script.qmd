@@ -148,7 +148,7 @@ source(searchDirectory(4, "omlvision_wrapper.R", (getwd())))
 
 df_keys <- omlvisionDecomposition(omlrepo = omlrepo, 
                                   df_prefix = df_prefix_imce, 
-                                  viewname = "orbit-analysis-01-workflow", 
+                                  viewname = "workflow-orbit-analysis-01", 
                                   title = "Workflow orbit analysis 01", 
                                   targetConcept = c("project:Process project:WorkPackage"),
                                   targetRelation = "project:isExecutedBy",
