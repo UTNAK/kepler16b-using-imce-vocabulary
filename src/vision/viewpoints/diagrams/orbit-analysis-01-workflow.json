@@ -8,7 +8,7 @@
   "rowMapping": {
     "id": "node",
     "name": "Parent",
-    "labelFormat": "{c1_instancename}",
+    "labelFormat": "<<{c1_type}>> {c1_instancename}",
     "nodeColor": "#006994",
     "nodeTextColor": "white",
     "nodeType": "NA",
