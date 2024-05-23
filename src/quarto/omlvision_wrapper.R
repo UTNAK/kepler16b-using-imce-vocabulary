@@ -55,8 +55,10 @@ generateQueryDecomposition <- function(df, df_prefix){
   )
   text_instance <- paste0(text_instance,
                           "  ?", df$parent, " a ?componentType ;","\n",
-                          "    base:hasIdentifier ?", df$parent_id, " ;\n",
-                          "    base:hasCanonicalName ?", df$parent_name, " ;\n",
+                          "    OPTIONAL{\n",
+                          "      ?", df$parent, " base:hasIdentifier ?", df$parent_id, " ;\n",
+                          "        base:hasCanonicalName ?", df$parent_name, " ;\n",
+                          "    }\n",
                           "\n",
                           "  OPTIONAL{\n",
                           "    ?", df$parent, " ", df$target_relation, " ?", df$child, " ;\n",

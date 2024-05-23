@@ -115,11 +115,11 @@ df_keys <- omlvisionRelationMap(omlrepo = omlrepo,
 ## Prefix for imce foundation vocabularies
 
 ```{r}
-df_prefix <- data.frame(
+df_prefix_imce <- data.frame(
   prefix = c("base",
              "mission",
-             "project",
-             "analysis"),
+             "analysis",
+             "project"),
   iri = c("http://imce.jpl.nasa.gov/foundation/base#",
           "http://imce.jpl.nasa.gov/foundation/mission#",
           "http://imce.jpl.nasa.gov/foundation/analysis#",
@@ -127,7 +127,34 @@ df_prefix <- data.frame(
           )
 )
 
-cat(generatePrefix(df_prefix))
+cat(generatePrefix(df_prefix_imce))
 
 ```
 
+
+## orbit-analysis-01 WorkPackage
+
+```
+    instance orbit-analysis-01 : project:WorkPackage [
+        project:executes mass-roll-up
+        project:executes calc-delta-v 
+        project:executes calc-fuel-mass
+    ]
+```
+
+
+```{r}
+source(searchDirectory(4, "omlvision_wrapper.R", (getwd())))
+
+df_keys <- omlvisionDecomposition(omlrepo = omlrepo, 
+                                  df_prefix = df_prefix_imce, 
+                                  viewname = "orbit-analysis-01-workflow", 
+                                  title = "Workflow orbit analysis 01", 
+                                  targetConcept = c("project:Process project:WorkPackage"),
+                                  targetRelation = "project:isExecutedBy",
+                                  nodeColor = "#006994",
+                                  nodeTextColor = "white")
+
+
+
+```

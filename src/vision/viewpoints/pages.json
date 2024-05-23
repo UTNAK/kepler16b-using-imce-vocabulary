@@ -48,6 +48,11 @@
         "title": "Auto State Effect Diagram 2",
         "type": "diagram",
         "path": "auto-state-effect-diagram-2"
+      },
+      {
+        "title": "Workflow orbit analysis 01",
+        "type": "diagram",
+        "path": "orbit-analysis-01-workflow"
       }
     ]
   },
