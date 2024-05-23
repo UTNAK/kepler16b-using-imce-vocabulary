@@ -226,6 +226,16 @@ task stopKillServer(group:"vision") {
     }
 }
 
+/*
+ * A task for executing quarto notebook 
+ */
+task renderQuarto(group: "vision"){
+    doLast{
+        exec{
+            commandLine "sh", "-c", "quarto render src/analysis/analysisShell.qmd"
+        }
+    }
+}
 
 /*
  * A task to query the OML dataset in Fuseki

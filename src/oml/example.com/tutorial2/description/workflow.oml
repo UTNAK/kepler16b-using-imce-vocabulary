@@ -1,61 +1,54 @@
 description <http://example.com/tutorial2/description/workflow#> as workflow {
 
-	extends <http://example.com/tutorial2/description/components#> as components
+	extends <http://example.com/tutorial2/description/components#>
 
-    extends <http://example.com/tutorial2/description/statedictionary#> as statedictionary
+	extends <http://example.com/tutorial2/description/statedictionary#> as statedictionary
 
-	uses <http://bipm.org/jcgm/vim4#> as vim4
+	uses <http://bipm.org/jcgm/vim4#>
 
-    uses <http://imce.jpl.nasa.gov/foundation/analysis#> as analysis
+	uses <http://example.com/tutorial2/vocabulary/stateanalysis#>
 
-    uses <http://example.com/tutorial2/vocabulary/stateanalysis#> as sa
+	uses <http://imce.jpl.nasa.gov/foundation/analysis#>
 
-    uses <http://imce.jpl.nasa.gov/foundation/project#> as project
+	uses <http://imce.jpl.nasa.gov/foundation/project#> as project
 
-    instance orbit-analysis-01 : project:WorkPackage [
-        project:executes mass-roll-up
-        project:executes calc-delta-v 
-        project:executes calc-fuel-mass
-    ]
+	ref instance statedictionary:orbiter-spacecraft.delta-v : project:Deliverable
 
-    instance system-configulation : project:Deliverable
-   
+	ref instance statedictionary:orbiter-spacecraft.mass.dry : project:Deliverable
 
-    instance mass-roll-up : project:Process [
-        project:interchangesThrough mass-roll-up.ip.in
-        project:interchangesThrough mass-roll-up.ip.out
-    ]
+	instance calc-delta-v : project:Process [
+		project:interchangesThrough calc-delta-v.ip.in
+		project:interchangesThrough calc-delta-v.ip.out
+	]
 
-    instance mass-roll-up.ip.in : project:InterchangePoint [
-        project:receives system-configulation
-    ]
+	instance calc-delta-v.ip.in : project:InterchangePoint [
+		project:receives statedictionary:orbiter-spacecraft.mass.dry
+	]
 
-    instance mass-roll-up.ip.out : project:InterchangePoint [
-        project:delivers statedictionary:orbiter-spacecraft.mass.dry
-    ]
+	instance calc-delta-v.ip.out : project:InterchangePoint [
+		project:delivers statedictionary:orbiter-spacecraft.delta-v
+	]
 
-    ref instance statedictionary:orbiter-spacecraft.mass.dry : project:Deliverable
+	instance calc-fuel-mass : project:Process
 
+	instance mass-roll-up : project:Process [
+		project:interchangesThrough mass-roll-up.ip.in
+		project:interchangesThrough mass-roll-up.ip.out
+	]
 
-    instance calc-delta-v : project:Process [
-        project:interchangesThrough calc-delta-v.ip.in
-        project:interchangesThrough calc-delta-v.ip.out
-    ]
-    instance calc-delta-v.ip.in : project:InterchangePoint [
-        project:receives statedictionary:orbiter-spacecraft.mass.dry
-    ]
+	instance mass-roll-up.ip.in : project:InterchangePoint [
+		project:receives system-configulation
+	]
 
-    instance calc-delta-v.ip.out : project:InterchangePoint [
-        project:delivers statedictionary:orbiter-spacecraft.delta-v
-    ]
+	instance mass-roll-up.ip.out : project:InterchangePoint [
+		project:delivers statedictionary:orbiter-spacecraft.mass.dry
+	]
 
-    ref instance statedictionary:orbiter-spacecraft.delta-v : project:Deliverable
+	instance orbit-analysis-01 : project:WorkPackage [
+		project:executes calc-delta-v
+		project:executes calc-fuel-mass
+		project:executes mass-roll-up
+	]
 
-
-
-
-    instance calc-fuel-mass : project:Process
-
-
-
+	instance system-configulation : project:Deliverable
 }
