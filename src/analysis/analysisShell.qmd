@@ -110,7 +110,7 @@ source(searchDirectory(4, "massRollupKepler16b.R", (getwd())))
 
 ```{r}
 library(reticulate)
-use_condaenv("py39")
+#use_condaenv("py39")
 use_condaenv("py393")
 ```
 
