@@ -111,7 +111,7 @@ source(searchDirectory(4, "massRollupKepler16b.R", (getwd())))
 ```{r}
 library(reticulate)
 use_condaenv("py39")
-use_condaenv("py393")
+#use_condaenv("py393")
 ```
 
 ## Build and Run a Fuseki SPARQL endpoint for oml model query
@@ -123,27 +123,27 @@ use_condaenv("py393")
 library(omlhashiR)
 ## oml_repository <- "../open-source-rover/"
 oml_repository <- omlrepo
-#ret1 <- omlhashiR::oml_refresh()
+ret1 <- omlhashiR::oml_refresh()
 ```
 ```{r}
 #| label: gradle-02-stop
-#ret2 <- omlhashiR::oml_stop_Daemon(oml_repository)
+ret2 <- omlhashiR::oml_stop_Daemon(oml_repository)
 ```
 ```{r}
 #| label: gradle-03-build
-#ret3 <- omlhashiR::oml_callTask(oml_repository, "build")
+ret3 <- omlhashiR::oml_callTask(oml_repository, "build")
 ```
 
 ## Start Fuseki Server
 ```{r}
 #| label: gradle-04-start-fuseki
-#ret4 <- omlhashiR::oml_callTask(oml_repository, "startFuseki")
+ret4 <- omlhashiR::oml_callTask(oml_repository, "startFuseki")
 ```
 
 ## Load in OWL ontologies to Fuseki Server
 ```{r}
 #| label: gradle-05-owl-load
-#ret5 <- omlhashiR::oml_callTask(oml_repository, "owlLoad")
+ret5 <- omlhashiR::oml_callTask(oml_repository, "owlLoad")
 ```
 
 ## Get Configuration & Mass Properties
@@ -697,4 +697,34 @@ print(f"Required fuel mass: {analysisRocket.m_fuel}\n final: {analysisRocket.m_f
 source(searchDirectory(4, "calcDeltaV.R", (getwd())))
 
 dv <- calcDeltaV(initOrbit=df_parameters$initOrbit, targetOrbit = df_parameters$targetOrbit)
+```
+
+
+
+
+## MEL including fuel and wet mass
+
+
+```{r}
+df_mel_wet <- df_mel_after %>%
+  add_row(c_id="C.03", name="orbiter-spacecraft-fuel", mass=round(df_parameters$m_fuel,0), componenttype="fuel") %>%
+  add_row(c_id="C.04", name="orbiter-spacecraft-wet", mass=round(df_parameters$m_wet,0), componenttype="system") 
+
+
+df_table <- df_mel_wet %>%
+  mutate(totalmass=mass) %>%
+  select(c_id, name, totalmass, componenttype) 
+
+# add indent 
+
+df_table$name[df_table$componenttype == "subsystem"] <- paste0("\s\s\s", df_table$name[df_table$componenttype == "subsystem"])
+
+
+
+df_table$componenttype <- factor(df_table$componenttype)
+
+datatable(df_table, options = list(autoWidth = FALSE, pageLength = -1), filter = list(
+  position = 'top', clear = FALSE
+))
+
 ```
