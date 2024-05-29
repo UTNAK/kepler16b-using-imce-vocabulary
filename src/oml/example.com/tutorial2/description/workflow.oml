@@ -6,9 +6,9 @@ description <http://example.com/tutorial2/description/workflow#> as workflow {
 
 	uses <http://bipm.org/jcgm/vim4#>
 
-	uses <http://example.com/tutorial2/vocabulary/stateanalysis#>
+	uses <http://example.com/tutorial2/vocabulary/stateanalysis#> 
 
-	uses <http://imce.jpl.nasa.gov/foundation/analysis#>
+	uses <http://imce.jpl.nasa.gov/foundation/analysis#> as analysis
 
 	uses <http://imce.jpl.nasa.gov/foundation/project#> as project
 
@@ -16,20 +16,41 @@ description <http://example.com/tutorial2/description/workflow#> as workflow {
 
 	ref instance statedictionary:orbiter-spacecraft.mass.dry : project:Deliverable
 
+	ref instance statedictionary:orbiter-spacecraft.mass.wet : project:Deliverable
+	ref instance statedictionary:orbiter-spacecraft.mass.fuel : project:Deliverable
+	ref instance statedictionary:orbiter-spacecraft.isp : project:Deliverable
+	ref instance statedictionary:orbiter-spacecraft.initial-orbit : project:Deliverable
+	ref instance statedictionary:orbiter-spacecraft.target-orbit : project:Deliverable
+
 	instance calc-delta-v : project:Process [
 		project:interchangesThrough calc-delta-v.ip.in
 		project:interchangesThrough calc-delta-v.ip.out
 	]
 
 	instance calc-delta-v.ip.in : project:InterchangePoint [
-		project:receives statedictionary:orbiter-spacecraft.mass.dry
+		project:receives statedictionary:orbiter-spacecraft.initial-orbit
+		project:receives statedictionary:orbiter-spacecraft.target-orbit
 	]
 
 	instance calc-delta-v.ip.out : project:InterchangePoint [
 		project:delivers statedictionary:orbiter-spacecraft.delta-v
 	]
 
-	instance calc-fuel-mass : project:Process
+	instance calc-fuel-mass : project:Process [
+		project:interchangesThrough calc-fuel-mass.ip.in
+		project:interchangesThrough calc-fuel-mass.ip.out
+	]
+
+	instance calc-fuel-mass.ip.in : project:InterchangePoint [
+		project:receives statedictionary:orbiter-spacecraft.mass.dry
+		project:receives statedictionary:orbiter-spacecraft.delta-v
+		project:receives statedictionary:orbiter-spacecraft.isp
+	]
+
+	instance calc-fuel-mass.ip.out : project:InterchangePoint [
+		project:delivers statedictionary:orbiter-spacecraft.mass.wet
+		project:delivers statedictionary:orbiter-spacecraft.mass.fuel
+	]
 
 	instance mass-roll-up : project:Process [
 		project:interchangesThrough mass-roll-up.ip.in
@@ -51,4 +72,16 @@ description <http://example.com/tutorial2/description/workflow#> as workflow {
 	]
 
 	instance system-configulation : project:Deliverable
+
+	instance orbit-analysis-01.scenario : analysis:Scenario
+// The scenario configures analysis context
+//   - Inteded state variables.
+//   - Inteded analysis modules.
+//   - Inteded validation rules.
+//   - Inteded system configuration as a graph
+// 
+// This scenario inteded to analyse "statedictionary:orbiter-spacecraft.mass.wet"
+// m_wer's related state variables are derived using "affects" relationship
+// sparql query extract
+
 }

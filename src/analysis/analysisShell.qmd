@@ -698,3 +698,33 @@ source(searchDirectory(4, "calcDeltaV.R", (getwd())))
 
 dv <- calcDeltaV(initOrbit=df_parameters$initOrbit, targetOrbit = df_parameters$targetOrbit)
 ```
+
+
+
+
+## MEL including fuel and wet mass
+
+
+```{r}
+df_mel_wet <- df_mel_after %>%
+  add_row(c_id="C.03", name="orbiter-spacecraft-fuel", mass=round(df_parameters$m_fuel,0), componenttype="fuel") %>%
+  add_row(c_id="C.04", name="orbiter-spacecraft-wet", mass=round(df_parameters$m_wet,0), componenttype="system") 
+
+
+df_table <- df_mel_wet %>%
+  mutate(totalmass=mass) %>%
+  select(c_id, name, totalmass, componenttype) 
+
+# add indent 
+
+df_table$name[df_table$componenttype == "subsystem"] <- paste0("\s\s\s", df_table$name[df_table$componenttype == "subsystem"])
+
+
+
+df_table$componenttype <- factor(df_table$componenttype)
+
+datatable(df_table, options = list(autoWidth = FALSE, pageLength = -1), filter = list(
+  position = 'top', clear = FALSE
+))
+
+```
