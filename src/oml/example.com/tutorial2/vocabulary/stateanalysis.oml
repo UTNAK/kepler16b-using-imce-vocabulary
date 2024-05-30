@@ -9,6 +9,7 @@ vocabulary <http://example.com/tutorial2/vocabulary/stateanalysis#> as sa {
 	extends <http://imce.jpl.nasa.gov/foundation/mission#> as mission
 	extends <http://imce.jpl.nasa.gov/foundation/base#> as base
 	extends <http://imce.jpl.nasa.gov/foundation/analysis#> as analysis
+	extends <http://imce.jpl.nasa.gov/foundation/project#> as project
 	extends <http://www.w3.org/2001/XMLSchema#> as xsd
 
 	@rdfs:label "State Variable"
@@ -51,6 +52,38 @@ vocabulary <http://example.com/tutorial2/vocabulary/stateanalysis#> as sa {
 	]
 
 
+	// idea for scenario 
+	concept simulationScenario < analysis:Scenario [
+		restricts all assumes to StateVariable
+	]
+	// Scenario Sets 
+	@rdfs:label "Assumes"
+	@dc:description """A [=Scenario=] [=assumes=] zero or more [=Constraint=]s."""
+	relation entity Assumes [
+		from simulationScenario
+		to StateVariable
+		@rdfs:label "assumes"
+		forward assumes
+		asymmetric
+	]
+	// Scenario assumes initial value
+	scalar property assumeInitialStateValue [
+		domain Assumes
+		range xsd:string
+	]
+
+// Scenario Sets 
+	@rdfs:label "WorkPackageUses"
+	@dc:description """A [=WorkPackage] [=uses=] zero or more [=Scenario=]s."""
+	relation entity WorkPackageUses [
+		from project:WorkPackage
+		to simulationScenario
+		@rdfs:label "workpackageuses"
+		forward workpackageuses
+		asymmetric
+	]
+
+
 //	@rdfs:comment "The class of magnitudes in kilograms for mass quantities on mechanical components"
  	// @dc:description "A StateValue is an instance of the value content of a StateVariable.  A given StateVariable may contain a history (time ordered set) of StateValues, or it may contain a producing state function that produces time-dependent values on demand."
 	// @rdfs:label "State Value"
@@ -59,11 +92,6 @@ vocabulary <http://example.com/tutorial2/vocabulary/stateanalysis#> as sa {
 	// 	restricts all vim4:characterizes to MechanicalComponent
 	// 	restricts vim4:instantiates to iso-80000-4.1:mass
 	// 	restricts vim4:unit to iso-80000-4.1:kilogram
-	// ]
-
-	// scalar property hasStateValue [
-	// 	domain StateVariable
-	// 	range xsd:string
 	// ]
 
 	// relation entity CharacterizesStateOf [
