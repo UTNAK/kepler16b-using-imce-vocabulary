@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Yuta Nakajima">
-<meta name="dcterms.date" content="2024-05-23">
+<meta name="dcterms.date" content="2024-05-16">
 <meta name="description" content="This shell scripts execute different types of analysis codes.">
 
 <title>Prototype for integration of descriptive and analysis model</title>
@@ -6541,7 +6541,7 @@ b&&(b.preventDefault(),b.stopPropagation())}else(l.isFocused||"single"===l.setti
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">May 23, 2024</p>
+        <p class="date">May 16, 2024</p>
       </div>
     </div>
     
@@ -6705,42 +6705,34 @@ b&&(b.preventDefault(),b.stopPropagation())}else(l.isFocused||"single"===l.setti
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">use_condaenv</span>(<span class="st">&quot;py39&quot;</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">use_condaenv</span>(<span class="st">&quot;py393&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># use_condaenv(&quot;py393&quot;)</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">use_python</span>(<span class="st">&quot;/Users/mlab/opt/anaconda3/envs/py393/bin/python&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
 <section id="build-and-run-a-fuseki-sparql-endpoint-for-oml-model-query" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="build-and-run-a-fuseki-sparql-endpoint-for-oml-model-query"><span class="header-section-number">2.2</span> Build and Run a Fuseki SPARQL endpoint for oml model query</h2>
-<!-- This runs build and load gradle tasks.  Can be run with OML Vision -->
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(omlhashiR)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">## oml_repository &lt;- &quot;../open-source-rover/&quot;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>oml_repository <span class="ot">&lt;-</span> omlrepo</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ret1 <span class="ot">&lt;-</span> omlhashiR<span class="sc">::</span><span class="fu">oml_refresh</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ret2 <span class="ot">&lt;-</span> omlhashiR<span class="sc">::</span><span class="fu">oml_stop_Daemon</span>(oml_repository)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ret3 <span class="ot">&lt;-</span> omlhashiR<span class="sc">::</span><span class="fu">oml_callTask</span>(oml_repository, <span class="st">&quot;build&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(omlhashiR)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">## oml_repository &lt;- &quot;../open-source-rover/&quot;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>oml_repository <span class="ot">&lt;-</span> omlrepo</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>ret1 <span class="ot">&lt;-</span> omlhashiR<span class="sc">::</span><span class="fu">oml_refresh</span>()</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>ret2 <span class="ot">&lt;-</span> omlhashiR<span class="sc">::</span><span class="fu">oml_stop_Daemon</span>(oml_repository)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>ret3 <span class="ot">&lt;-</span> omlhashiR<span class="sc">::</span><span class="fu">oml_build</span>(oml_repository)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>ret4 <span class="ot">&lt;-</span> omlhashiR<span class="sc">::</span><span class="fu">oml_startFuseki</span>(oml_repository)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>ret5 <span class="ot">&lt;-</span> omlhashiR<span class="sc">::</span><span class="fu">oml_owlLoad</span>(oml_repository)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="start-fuseki-server" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="start-fuseki-server"><span class="header-section-number">2.3</span> Start Fuseki Server</h2>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ret4 <span class="ot">&lt;-</span> omlhashiR<span class="sc">::</span><span class="fu">oml_callTask</span>(oml_repository, <span class="st">&quot;startFuseki&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tansakusuR)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>endpoint_url <span class="ot">&lt;-</span> <span class="st">&quot;http://localhost:3030/tutorial2/sparql&quot;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>configuration_root_iri <span class="ot">&lt;-</span> <span class="st">&quot;http://example.com/tutorial2/description/components#orbiter-spacecraft&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -6749,7 +6741,55 @@ b&&(b.preventDefault(),b.stopPropagation())}else(l.isFocused||"single"===l.setti
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ret5 <span class="ot">&lt;-</span> omlhashiR<span class="sc">::</span><span class="fu">oml_callTask</span>(oml_repository, <span class="st">&quot;owlLoad&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>query_string <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="st">PREFIX mission:     &lt;http://imce.jpl.nasa.gov/foundation/mission#&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="st">PREFIX base:        &lt;http://imce.jpl.nasa.gov/foundation/base#&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="st">PREFIX project:     &lt;http://imce.jpl.nasa.gov/foundation/project#&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">PREFIX vim4:        &lt;http://bipm.org/jcgm/vim4#&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT DISTINCT ?c1 ?c1_instancename ?c1_id ?c1_name ?c1_mass ?c2 ?c2_instancename ?c2_id ?c2_name ?c2_mass ?c3 ?c3_instancename ?c3_id ?c3_name ?c4</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE {</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="st">  VALUES ?c1 { &lt;$configuration_root_iri&gt; }</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="st">   OPTIONAL{ </span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="st">    ?c1 base:hasIdentifier ?c1_id ;</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="st">      base:hasCanonicalName ?c1_name ;</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="st">    OPTIONAL {</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="st">        ?c1_mass_mag vim4:characterizes ?c1 ;</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="st">            vim4:hasDoubleNumber ?c1_mass .</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="st">    } </span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="st">  OPTIONAL{</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="st">    ?c1 base:contains ?c2 ;</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="st">    OPTIONAL{</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="st">      ?c2 base:hasIdentifier ?c2_id ;</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="st">          base:hasCanonicalName ?c2_name .</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="st">    OPTIONAL {</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="st">        ?c2_mass_mag vim4:characterizes ?c2 ;</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="st">            vim4:hasDoubleNumber ?c2_mass .</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="st">    }     </span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="st">    OPTIONAL{</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="st">      ?c2 project:isSuppliedBy ?c3 ;</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="st">          OPTIONAL{</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="st">            ?c3 base:hasIdentifier ?c3_id ;</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="st">                base:hasCanonicalName ?c3_name;</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="st">                project:isAuthorizedBy ?c4 .</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="st">          }          </span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="st">    }    </span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="st">  BIND(STRAFTER(STR(?c1), &quot;#&quot;) AS ?c1_instancename) .</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="st">  BIND(STRAFTER(STR(?c2), &quot;#&quot;) AS ?c2_instancename) .</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="st">  BIND(STRAFTER(STR(?c3), &quot;#&quot;) AS ?c3_instancename) .</span></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a><span class="st"> }</span></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY ?c2_id</span></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>query_string <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(query_string, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">$configuration_root_iri&quot;</span>, configuration_root_iri)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -6941,8 +6981,8 @@ b&&(b.preventDefault(),b.stopPropagation())}else(l.isFocused||"single"===l.setti
 </details>
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-c67ff9e5091f6e26736f" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-c67ff9e5091f6e26736f">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7"],["dv","initOrbit","I_sp","m_dry","m_fuel","m_wet","targetOrbit"],[0,400,350,0,0,0,35786]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>parameter<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"autoWidth":true,"pageLength":-1,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"orderClasses":false,"lengthMenu":[-1,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-13dd2aff69e6d545a917" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-13dd2aff69e6d545a917">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7"],["dv","initOrbit","I_sp","m_dry","m_fuel","m_wet","targetOrbit"],[0,400,350,0,0,0,35786]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>parameter<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"autoWidth":true,"pageLength":-1,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"orderClasses":false,"lengthMenu":[-1,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -6985,8 +7025,8 @@ b&&(b.preventDefault(),b.stopPropagation())}else(l.isFocused||"single"===l.setti
 <span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">type=</span><span class="st">&quot;c2_id&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="collapsibleTree html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-af7b12c50675e5940dcf" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-af7b12c50675e5940dcf">{"x":{"data":{"name":"C.02: orbiter-spacecraft","fill":"#F9FFAF","WeightOfNode":9,"children":[{"name":"C.02.09: orbiter-propulsion-subsystem","fill":"#2E4F79","WeightOfNode":1},{"name":"C.02.08: orbiter-spacraft-flight-software","fill":"#1C6685","WeightOfNode":1},{"name":"C.02.07: orbiter-mechanical-subsystem","fill":"#057C8E","WeightOfNode":1},{"name":"C.02.06: orbiter-guidance-navigation-control-subsystem","fill":"#109195","WeightOfNode":1},{"name":"C.02.05: orbiter-telecom-subsystem","fill":"#33A69A","WeightOfNode":1},{"name":"C.02.04: orbiter-command-and-data-handling-subsystem","fill":"#58BA9D","WeightOfNode":1},{"name":"C.02.03: orbiter-thermal-subsystem","fill":"#7FCD9F","WeightOfNode":1},{"name":"C.02.02: orbiter-harness","fill":"#A6DEA2","WeightOfNode":1},{"name":"C.02.01: orbiter-power-subsystem","fill":"#CFEFA8","WeightOfNode":1}]},"options":{"hierarchy":[1,2],"input":null,"attribute":"leafCount","linkLength":null,"fontSize":10,"tooltip":true,"collapsed":false,"zoomable":true,"margin":{"top":20,"bottom":20,"left":145,"right":295}}},"evals":[],"jsHooks":[]}</script>
+<div class="collapsibleTree html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-17e03ca8c03d8b00b163" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-17e03ca8c03d8b00b163">{"x":{"data":{"name":"C.02: orbiter-spacecraft","fill":"#F9FFAF","WeightOfNode":9,"children":[{"name":"C.02.09: orbiter-propulsion-subsystem","fill":"#2E4F79","WeightOfNode":1},{"name":"C.02.08: orbiter-spacraft-flight-software","fill":"#1C6685","WeightOfNode":1},{"name":"C.02.07: orbiter-mechanical-subsystem","fill":"#057C8E","WeightOfNode":1},{"name":"C.02.06: orbiter-guidance-navigation-control-subsystem","fill":"#109195","WeightOfNode":1},{"name":"C.02.05: orbiter-telecom-subsystem","fill":"#33A69A","WeightOfNode":1},{"name":"C.02.04: orbiter-command-and-data-handling-subsystem","fill":"#58BA9D","WeightOfNode":1},{"name":"C.02.03: orbiter-thermal-subsystem","fill":"#7FCD9F","WeightOfNode":1},{"name":"C.02.02: orbiter-harness","fill":"#A6DEA2","WeightOfNode":1},{"name":"C.02.01: orbiter-power-subsystem","fill":"#CFEFA8","WeightOfNode":1}]},"options":{"hierarchy":[1,2],"input":null,"attribute":"leafCount","linkLength":null,"fontSize":10,"tooltip":true,"collapsed":false,"zoomable":true,"margin":{"top":20,"bottom":20,"left":145,"right":295}}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -7098,8 +7138,8 @@ b&&(b.preventDefault(),b.stopPropagation())}else(l.isFocused||"single"===l.setti
 </details>
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-c5c058384b4d34e4aefe" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-c5c058384b4d34e4aefe">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"106\" data-max=\"1957\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;subsystem&quot;,&quot;system&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["1","2","3","4","5","6","7","8","9","10"],["C.02","C.02.01","C.02.02","C.02.03","C.02.04","C.02.05","C.02.06","C.02.07","C.02.08","C.02.09"],["orbiter-spacecraft","orbiter-power-subsystem","orbiter-harness","orbiter-thermal-subsystem","orbiter-command-and-data-handling-subsystem","orbiter-telecom-subsystem","orbiter-guidance-navigation-control-subsystem","orbiter-mechanical-subsystem","orbiter-spacraft-flight-software","orbiter-propulsion-subsystem"],[1957,297,138,307,147,316,156,325,165,106],["system","subsystem","subsystem","subsystem","subsystem","subsystem","subsystem","subsystem","subsystem","subsystem"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>c_id<\/th>\n      <th>name<\/th>\n      <th>totalmass<\/th>\n      <th>componenttype<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"autoWidth":false,"pageLength":-1,"columnDefs":[{"className":"dt-right","targets":3},{"orderable":false,"targets":0}],"order":[],"orderClasses":false,"orderCellsTop":true,"lengthMenu":[-1,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-09c1775aad6211f6d832" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-09c1775aad6211f6d832">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"106\" data-max=\"1957\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;subsystem&quot;,&quot;system&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["1","2","3","4","5","6","7","8","9","10"],["C.02","C.02.01","C.02.02","C.02.03","C.02.04","C.02.05","C.02.06","C.02.07","C.02.08","C.02.09"],["orbiter-spacecraft","orbiter-power-subsystem","orbiter-harness","orbiter-thermal-subsystem","orbiter-command-and-data-handling-subsystem","orbiter-telecom-subsystem","orbiter-guidance-navigation-control-subsystem","orbiter-mechanical-subsystem","orbiter-spacraft-flight-software","orbiter-propulsion-subsystem"],[1957,297,138,307,147,316,156,325,165,106],["system","subsystem","subsystem","subsystem","subsystem","subsystem","subsystem","subsystem","subsystem","subsystem"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>c_id<\/th>\n      <th>name<\/th>\n      <th>totalmass<\/th>\n      <th>componenttype<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"autoWidth":false,"pageLength":-1,"columnDefs":[{"className":"dt-right","targets":3},{"orderable":false,"targets":0}],"order":[],"orderClasses":false,"orderCellsTop":true,"lengthMenu":[-1,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -7211,8 +7251,8 @@ b&&(b.preventDefault(),b.stopPropagation())}else(l.isFocused||"single"===l.setti
 </details>
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-0bf9b5a53941616af7c9" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-0bf9b5a53941616af7c9">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7"],["dv","initOrbit","I_sp","m_dry","m_fuel","m_wet","targetOrbit"],[3.853959363102248,400,350,1957,4055.680381236295,6012.680381236295,35786]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>parameter<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"autoWidth":true,"pageLength":-1,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"orderClasses":false,"lengthMenu":[-1,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-49e02e5d0452cf79cab6" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-49e02e5d0452cf79cab6">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7"],["dv","initOrbit","I_sp","m_dry","m_fuel","m_wet","targetOrbit"],[3.853959363102248,400,350,1957,4055.680381236295,6012.680381236295,35786]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>parameter<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"autoWidth":true,"pageLength":-1,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"orderClasses":false,"lengthMenu":[-1,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -7277,11 +7317,6 @@ b&&(b.preventDefault(),b.stopPropagation())}else(l.isFocused||"single"===l.setti
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">datatable</span>(df_query, <span class="at">options =</span> <span class="fu">list</span>(<span class="at">autoWidth =</span> <span class="cn">FALSE</span>, <span class="at">pageLength =</span> <span class="sc">-</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-babaa656d3369fb10b5d" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-babaa656d3369fb10b5d">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7"],["http://example.com/tutorial2/description/statedictionary#orbiter-spacecraft.delta-v","http://example.com/tutorial2/description/statedictionary#orbiter-spacecraft.initial-orbit","http://example.com/tutorial2/description/statedictionary#orbiter-spacecraft.isp","http://example.com/tutorial2/description/statedictionary#orbiter-spacecraft.mass.dry","http://example.com/tutorial2/description/statedictionary#orbiter-spacecraft.mass.fuel","http://example.com/tutorial2/description/statedictionary#orbiter-spacecraft.mass.wet","http://example.com/tutorial2/description/statedictionary#orbiter-spacecraft.target-orbit"],["orbiter-spacecraft.delta-v","orbiter-spacecraft.initial-orbit","orbiter-spacecraft.isp","orbiter-spacecraft.mass.dry","orbiter-spacecraft.mass.fuel","orbiter-spacecraft.mass.wet","orbiter-spacecraft.target-orbit"],[null,"400","350",null,null,null,"35786"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>iri<\/th>\n      <th>statevariable<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"autoWidth":false,"pageLength":-1,"columnDefs":[{"orderable":false,"targets":0}],"order":[],"orderClasses":false,"lengthMenu":[-1,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
-</div>
 </div>
 </section>
 </section>
