@@ -10,7 +10,14 @@
     "rowMapping": {
       "id": "missions",
       "name": "Missions",
-      "labelFormat": "{m_id} {m_name}"
+      "labelFormat": "{m_id} {m_name}",
+      "fontStyle": {
+        "conditional": "id",
+        "styles": {
+          "0": "text-[color:var(--vscode-debugIcon-stepOverForeground)]",
+          "1": "text-[color:var(--vscode-gitDecoration-untrackedResourceForeground)]"
+        } 
+      }
     }
   }
 }
