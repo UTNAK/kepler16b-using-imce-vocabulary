@@ -96,5 +96,17 @@
         "path": "connections"
       }
     ]
+  },
+  {
+    "title": "Table",
+    "type": "group",
+    "iconUrl": "https://nasa-jpl.github.io/stellar/icons/satellite.svg",
+    "children": [
+      {
+        "title": "Mass Equipment List(MEL)",
+        "type": "table",
+        "path": "mel"
+      }
+    ]
   }
 ]

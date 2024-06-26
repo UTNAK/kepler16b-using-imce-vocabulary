@@ -1,0 +1,22 @@
+{
+  "mel": {
+    "name": "Mass Equipment List(MEL)",
+    "diagrams": {
+      "all-rows": "mel-table"
+    },
+    "columnNames": {
+        "c1_id": "Id",
+        "c1_name": "Canonical Name",
+        "m" : "mass",
+        "c2_name": "Parent"
+    },
+    "queries": {
+      "obj-query": "mel.sparql"
+    },
+    "rowMapping": {
+        "id": "obj-query",
+        "name": "Compoenents",
+        "labelFormat": "component"
+    }
+  }
+}
