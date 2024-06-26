@@ -18,5 +18,10 @@ description bundle <http://example.com/tutorial2/description/bundle#> as ^bundle
 
 	includes <http://example.com/tutorial2/description/workflow#>
 
+	includes <http://example.com/tutorial2/description/orbit_analysis_01#>
+
+	includes <http://example.com/tutorial2/description/orbit_analysis_02#>
+
 	uses <http://example.com/tutorial2/vocabulary/bundle#>
+
 }

@@ -1,0 +1,265 @@
+# Scenario and Workflow Modeling and Usages
+
+## Get Initial Values
+
+```sparql
+PREFIX oml: 			<http://opencaesar.io/oml#>
+PREFIX base:        <http://imce.jpl.nasa.gov/foundation/base#>
+PREFIX mission:        <http://imce.jpl.nasa.gov/foundation/mission#>
+PREFIX sa: 	<http://example.com/tutorial2/vocabulary/stateanalysis#>
+
+SELECT DISTINCT*
+WHERE {
+
+  VALUES ?componentType {sa:simulationScenario}
+
+  ?scenario a ?componentType .
+  ?r oml:hasSource ?scenario.
+  OPTIONAL{
+    ?r oml:hasTarget ?sv.
+    ?r sa:assumeInitialStateValue ?value. 
+  }
+  		
+  BIND(STRAFTER(STR(?scenario), "#") AS ?scenario_instancename) .
+  BIND(STRAFTER(STR(?sv), "#") AS ?sv_instancename) .
+ }
+ORDER BY ?c1_id
+```
+
+
+
+
+## Get Parameter tables
+
+
+
+```sparql
+PREFIX oml: 			<http://opencaesar.io/oml#>
+PREFIX base:        <http://imce.jpl.nasa.gov/foundation/base#>
+PREFIX mission:        <http://imce.jpl.nasa.gov/foundation/mission#>
+PREFIX sa: 	<http://example.com/tutorial2/vocabulary/stateanalysis#>
+PREFIX analysis: <http://imce.jpl.nasa.gov/foundation/analysis#>
+
+
+SELECT DISTINCT ?scenario ?iri ?value ?type
+WHERE {
+
+  VALUES ?componentType {sa:simulationScenario}
+
+	?scenario a ?componentType .
+	{?scenario analysis:asserts ?analysisTarget.
+    OPTIONAL{
+        ?analysisTarget sa:isAffectedBy* ?iri .
+ #         BIND("Dependent" as ?type)
+    }
+  OPTIONAL{
+   ?r oml:hasTarget ?iri.
+    OPTIONAL{
+	    ?r sa:assumeInitialStateValue ?value. 
+       BIND("DesignVariables" as ?type)
+    }
+  }    
+  }
+  UNION
+  {
+    ?scenario analysis:asserts ?iri.
+    BIND("Objectives" as ?type)
+  }
+
+  
+   #	Recursive Query to get state variables
+
+  	  
+ 
+#  BIND(STRAFTER(STR(?scenario), "#") AS ?scenario_instancename) .
+#  BIND(STRAFTER(STR(?sv), "#") AS ?sv_instancename) .
+ }
+ORDER BY ?c1_id
+```
+
+
+## Get specific scenario 
+
+この方法では、複数のシナリオが存在する場合に、データが正しく取得できないことが判明した。
+これをFixしてあげる必要！
+
+```sparql
+
+PREFIX oml: 			<http://opencaesar.io/oml#>
+PREFIX base:        <http://imce.jpl.nasa.gov/foundation/base#>
+PREFIX mission:        <http://imce.jpl.nasa.gov/foundation/mission#>
+PREFIX sa: 	<http://example.com/tutorial2/vocabulary/stateanalysis#>
+PREFIX analysis: <http://imce.jpl.nasa.gov/foundation/analysis#>
+
+
+SELECT DISTINCT ?scenario ?iri ?scenario_instancename ?statevariable ?value ?type
+WHERE {
+
+##  VALUES ?componentType {sa:simulationScenario}
+##	?scenario a ?componentType .
+  
+  VALUES ?scenario {<http://example.com/tutorial2/description/orbit_analysis_01#orbit-analysis-01.scenario>}
+  
+  ?scenario analysis:asserts ?analysisTarget ;
+
+#	?scenario analysis:asserts ?analysisTarget.
+    OPTIONAL{
+        ?analysisTarget sa:isAffectedBy* ?iri .
+        OPTIONAL{
+	         ?r oml:hasTarget ?iri.
+      			OPTIONAL{
+              ?r sa:assumeInitialStateValue ?value. 
+  #           BIND("DesignVariables" as ?type).
+          	}
+    	}    
+ 	 }
+  BIND( IF(?iri = ?analysisTarget, "OBJECTIVE", IF( BOUND(?value),"DesignVariables","Dependents")) AS ?type). 
+
+
+  
+   #	Recursive Query to get state variables
+
+  	  
+#    BIND(STRAFTER(STR(?scenario ), "#") AS ?scenario_instancename ) .
+
+  BIND(STRAFTER(STR(?scenario), "#") AS ?scenario_instancename) .
+  BIND(STRAFTER(STR(?iri), "#") AS ?statevariable) .
+ }
+ORDER BY ?c1_id
+
+```
+
+
+
+
+このクエリーであれば、ある特定のシナリオに関連する初期値のみを取り出せる。
+問題点は、state variable affect diagramを取得して統合すること。
+
+
+```SPARQL
+PREFIX oml: 			<http://opencaesar.io/oml#>
+PREFIX base:        <http://imce.jpl.nasa.gov/foundation/base#>
+PREFIX mission:        <http://imce.jpl.nasa.gov/foundation/mission#>
+PREFIX sa: 	<http://example.com/tutorial2/vocabulary/stateanalysis#>
+PREFIX analysis: <http://imce.jpl.nasa.gov/foundation/analysis#>
+
+
+SELECT DISTINCT ?scenario ?iri ?scenario_instancename ?statevariable ?value ?type
+WHERE {
+
+##  VALUES ?componentType {sa:simulationScenario}
+##	?scenario a ?componentType .
+  
+  VALUES ?scenario {<http://example.com/tutorial2/description/orbit_analysis_02#orbit-analysis-02.scenario>}
+  
+  {
+    ?scenario analysis:asserts ?iri.
+    BIND("Objectives" as ?type).
+  }
+  UNION
+  {
+    ?r oml:hasSource ?scenario.
+    ?r oml:hasTarget ?iri.
+    	OPTIONAL{
+      	?r sa:assumeInitialStateValue ?value. 
+      	BIND("DesignVariables" as ?type).
+    }
+    
+  }
+
+#	?scenario analysis:asserts ?analysisTarget.
+#    OPTIONAL{
+#        ?analysisTarget sa:isAffectedBy* ?iri .
+ #       OPTIONAL{
+#	         ?r oml:hasTarget ?iri.
+#      			OPTIONAL{
+#              ?r sa:assumeInitialStateValue ?value. 
+  #           BIND("DesignVariables" as ?type).
+ #         	}
+ #   	}    
+ #	 }
+#  BIND( IF(?iri = ?analysisTarget, "OBJECTIVE", IF( BOUND(?value),"DesignVariables","Dependents")) AS ?type). 
+
+
+  
+   #	Recursive Query to get state variables
+
+  	  
+#    BIND(STRAFTER(STR(?scenario ), "#") AS ?scenario_instancename ) .
+
+  BIND(STRAFTER(STR(?scenario), "#") AS ?scenario_instancename) .
+  BIND(STRAFTER(STR(?iri), "#") AS ?statevariable) .
+ }
+ORDER BY ?c1_id
+```
+
+
+
+
+下記のUNIONを使った場合を検証中。まだうまく行かない。
+
+```SPARQL
+PREFIX oml: 			<http://opencaesar.io/oml#>
+PREFIX base:        <http://imce.jpl.nasa.gov/foundation/base#>
+PREFIX mission:        <http://imce.jpl.nasa.gov/foundation/mission#>
+PREFIX sa: 	<http://example.com/tutorial2/vocabulary/stateanalysis#>
+PREFIX analysis: <http://imce.jpl.nasa.gov/foundation/analysis#>
+
+
+SELECT DISTINCT ?scenario ?iri ?scenario_instancename ?statevariable ?value ?type
+WHERE {
+
+##  VALUES ?componentType {sa:simulationScenario}
+##	?scenario a ?componentType .
+  
+  VALUES ?scenario {<http://example.com/tutorial2/description/orbit_analysis_02#orbit-analysis-02.scenario>}
+ { 
+  {
+    ?scenario analysis:asserts ?iri.
+    BIND("Objectives" as ?type).
+  }
+  UNION
+  {
+    ?r oml:hasSource ?scenario.
+    ?r oml:hasTarget ?iri.
+    	OPTIONAL{
+      	?r sa:assumeInitialStateValue ?value. 
+      	BIND("DesignVariables" as ?type).
+    }
+  }
+}
+	UNION
+  {
+    ?scenario analysis:asserts ?analysisTarget.
+    OPTIONAL{
+        ?analysisTarget sa:isAffectedBy* ?iri2 .
+      	  FILTER( ?iri2 != ?iri)
+    }    
+  }
+#	?scenario analysis:asserts ?analysisTarget.
+#    OPTIONAL{
+#        ?analysisTarget sa:isAffectedBy* ?iri .
+ #       OPTIONAL{
+#	         ?r oml:hasTarget ?iri.
+#      			OPTIONAL{
+#              ?r sa:assumeInitialStateValue ?value. 
+  #           BIND("DesignVariables" as ?type).
+ #         	}
+ #   	}    
+ #	 }
+#  BIND( IF(?iri = ?analysisTarget, "OBJECTIVE", IF( BOUND(?value),"DesignVariables","Dependents")) AS ?type). 
+
+
+  
+   #	Recursive Query to get state variables
+
+  	  
+#    BIND(STRAFTER(STR(?scenario ), "#") AS ?scenario_instancename ) .
+
+  BIND(STRAFTER(STR(?scenario), "#") AS ?scenario_instancename) .
+  BIND(STRAFTER(STR(?iri), "#") AS ?statevariable) .
+ }
+ORDER BY ?c1_id
+
+
+```

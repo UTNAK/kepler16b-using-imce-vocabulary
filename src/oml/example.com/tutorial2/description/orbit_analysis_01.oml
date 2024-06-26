@@ -1,0 +1,55 @@
+description <http://example.com/tutorial2/description/orbit_analysis_01#> as orbit_analysis_01 {
+
+	extends <http://example.com/tutorial2/description/components#> as components
+
+	extends <http://example.com/tutorial2/description/statedictionary#> as statedictionary
+
+    extends <http://example.com/tutorial2/description/workflow#> as workflow
+
+	uses <http://bipm.org/jcgm/vim4#>
+
+	uses <http://example.com/tutorial2/vocabulary/stateanalysis#> as sa
+
+	uses <http://imce.jpl.nasa.gov/foundation/analysis#> as analysis
+
+	uses <http://imce.jpl.nasa.gov/foundation/project#> as project
+
+	instance orbit-analysis-01 : project:WorkPackage [
+		project:executes workflow:calc-delta-v
+		project:executes workflow:calc-fuel-mass
+		project:executes workflow:mass-roll-up
+		sa:workpackageuses orbit-analysis-01.scenario
+	]
+
+	instance system-configulation : project:Deliverable
+
+	instance orbit-analysis-01.scenario : sa:simulationScenario [
+		analysis:asserts statedictionary:orbiter-spacecraft.mass.wet
+	]
+
+	relation instance orbit-analysis-01.scenario.value.01 : sa:Assumes [
+		from orbit-analysis-01.scenario
+		to statedictionary:orbiter-spacecraft.initial-orbit
+		sa:assumeInitialStateValue "300"
+	]
+	relation instance orbit-analysis-01.scenario.value.02 : sa:Assumes [
+		from orbit-analysis-01.scenario
+		to statedictionary:orbiter-spacecraft.target-orbit
+		sa:assumeInitialStateValue "36000"
+	]
+	relation instance orbit-analysis-01.scenario.value.03 : sa:Assumes [
+		from orbit-analysis-01.scenario
+		to statedictionary:orbiter-spacecraft.isp
+		sa:assumeInitialStateValue "333"
+	]
+// The scenario configures analysis context
+//   - Inteded state variables.
+//   - Inteded analysis modules.
+//   - Inteded validation rules.
+//   - Inteded system configuration as a graph
+// 
+// This scenario inteded to analyse "statedictionary:orbiter-spacecraft.mass.wet"
+// m_wer's related state variables are derived using "affects" relationship
+// sparql query extract
+
+}
