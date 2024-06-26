@@ -25,16 +25,6 @@
         "path": "ibd-sys"
       },
       {
-        "title": "Components Tree",
-        "type": "tree",
-        "path": "components-tree"
-      },
-      {
-        "title": "Components Mass Tree",
-        "type": "tree",
-        "path": "components-mass-tree"
-      },
-      {
         "title": "Auto Test Diagram",
         "type": "diagram",
         "path": "auto-decomposition"
