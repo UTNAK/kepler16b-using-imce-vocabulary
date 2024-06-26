@@ -3,7 +3,7 @@ PREFIX mission:     <http://imce.jpl.nasa.gov/foundation/mission#>
 PREFIX oml:     	<http://opencaesar.io/oml#>
 PREFIX rdfs:     	<http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT DISTINCT ?iri ?r_id ?c_name ?i_name
+SELECT DISTINCT ?iri ?r_id ?req ?c_name ?i_name
 WHERE {
 	?iri a mission:Requirement ;
 		base:hasIdentifier ?r_id ;
@@ -16,5 +16,7 @@ WHERE {
 				base:hasCanonicalName ?i_name
 			]
 		]
+    BIND(STRAFTER(STR(?iri), "#") AS ?req) .
+
 }
 ORDER BY ?r_id ?c_name ?i_name
