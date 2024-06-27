@@ -7,9 +7,9 @@ PREFIX vim4:		<http://bipm.org/jcgm/vim4#>
 
 SELECT DISTINCT ?iri ?system ?c1_id ?c1_name ?c1_mass ?type ?m
 WHERE {
-	?iri a mission:Mission ;
+	?mission a mission:Mission ;
 	OPTIONAL {
-		?iri	mission:deploys ?siri .
+		?mission	mission:deploys ?iri .
    		OPTIONAL{
       		?iri base:hasIdentifier ?c1_id ;
           			base:hasCanonicalName ?c1_name .

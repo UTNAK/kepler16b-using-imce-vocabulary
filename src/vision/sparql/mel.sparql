@@ -1,4 +1,6 @@
-PREFIX mi: <http://www.marineinfo.org/ns/ontology#>
+
+# http://example.com/tutorial2/description/components#orbiter-spacecraft
+# http://example.com/tutorial2/description/components#orbiter-spacecraft
 PREFIX base:        <http://imce.jpl.nasa.gov/foundation/base#>
 PREFIX mission:     <http://imce.jpl.nasa.gov/foundation/mission#>
 PREFIX vim4:		<http://bipm.org/jcgm/vim4#>
@@ -10,7 +12,9 @@ WHERE {
 	?iri a mission:Component ;
 		base:hasIdentifier ?c1_id ;
 		base:hasCanonicalName ?c1_name ;
-		mission:isDeployedBy ?systemIri .
+		base:isContainedIn ?systemIri .
+
+	?systemIri base:contains ?iri ;
 	
 	OPTIONAL {
 		?c1_mass_mag vim4:characterizes ?iri ;
