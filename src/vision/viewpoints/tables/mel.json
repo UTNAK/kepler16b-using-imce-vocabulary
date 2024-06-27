@@ -2,21 +2,28 @@
   "mel": {
     "name": "Mass Equipment List(MEL)",
     "diagrams": {
-      "all-rows": "mel-table"
+      "all-rows": "system"
     },
     "columnNames": {
         "c1_id": "Id",
         "c1_name": "Canonical Name",
-        "m" : "mass",
-        "c2_name": "Parent"
+        "m" : "mass"
     },
     "queries": {
-      "obj-query": "mel.sparql"
+      "parent": "mel_system.sparql",
+      "child": "mel.sparql"
     },
     "rowMapping": {
-        "id": "obj-query",
-        "name": "Compoenents",
-        "labelFormat": "component"
+        "id": "parent",
+        "name": "Parent",
+        "labelFormat": "{system}",
+        "subRowMappings":[
+          {
+            "id": "child",
+            "name": "Child",
+            "labelFormat": "{subsystem}"
+          }
+        ]
     }
   }
 }
