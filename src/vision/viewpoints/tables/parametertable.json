@@ -14,7 +14,15 @@
     "rowMapping": {
       "id": "obj-query",
       "name": "SV",
-      "labelFormat": "SV"
+      "labelFormat": "SV",
+      "fontStyle": {
+        "conditional": "State Variable",
+        "styles": {
+          "orbiter-spacecraft.delta-v": "text-[color:var(--vscode-debugIcon-stepOverForeground)]",
+          "orbiter-spacecraft.initial-orbit": "text-[color:var(--vscode-gitDecoration-untrackedResourceForeground)]",
+          "orbiter-spacecraft.isp": "text-[color:var(--vscode-charts-red)] line-through"
+        } 
+      }
     }
   }
 }
