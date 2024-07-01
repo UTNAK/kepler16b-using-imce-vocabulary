@@ -2,9 +2,9 @@
     "ibd": {
         "name": "IBD",
         "queries": {
-          "subsystem": "ibd-subsystem.sparql",
-          "assembly": "ibd-assembly.sparql",
-          "edge": "junction.sparql"
+          "subsystem": "mel_system.sparql",
+          "assembly": "mel.sparql",
+          "edge": "ibd-junction.sparql"
         },
         "rowMapping": {
           "id": "subsystem",
@@ -12,7 +12,8 @@
           "labelFormat": "{subsystem}",
           "nodeColor": "Aqua",
           "nodeTextColor": "black",
-          "nodeType": "{c1_type}",
+          "nodeType": "system",
+          "edgeMatchKey": "subsystem",
           "subRowMappings": [
             {
               "id": "assembly",
@@ -20,8 +21,7 @@
               "labelFormat": "{assembly}",
               "nodeColor": "Navy",
               "nodeTextColor": "white",
-              "nodeType": "subsystem",
-              "edgeMatchKey": "assembly"
+              "nodeType": "assembly"
             }
           ]
         },

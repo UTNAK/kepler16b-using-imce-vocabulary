@@ -20,11 +20,6 @@
         "path": "ibd"
       },
       {
-        "title": "IBD with Sys",
-        "type": "diagram",
-        "path": "ibd-sys"
-      },
-      {
         "title": "Auto Test Diagram",
         "type": "diagram",
         "path": "auto-decomposition"
