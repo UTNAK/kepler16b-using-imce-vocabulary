@@ -1,0 +1,29 @@
+
+# http://example.com/tutorial2/description/components#orbiter-spacecraft
+# http://example.com/tutorial2/description/components#orbiter-spacecraft
+PREFIX base:        <http://imce.jpl.nasa.gov/foundation/base#>
+PREFIX mission:     <http://imce.jpl.nasa.gov/foundation/mission#>
+PREFIX vim4:		<http://bipm.org/jcgm/vim4#>
+
+
+#SELECT DISTINCT ?iri ?subsystem ?c1_id ?c1_name ?c1_type ?systemIri ?mass ?m
+SELECT DISTINCT ?iri ?subsystem ?c1_id ?c1_name ?systemIri ?c1_mass ?type ?m 
+WHERE {
+	?iri a mission:Component ;
+		base:hasIdentifier ?c1_id ;
+		base:hasCanonicalName ?c1_name ;
+		base:isContainedIn ?systemIri .
+
+	?systemIri base:contains ?iri ;
+	
+	OPTIONAL {
+		?c1_mass_mag vim4:characterizes ?iri ;
+			vim4:hasDoubleNumber ?c1_mass .
+	}
+    BIND((STR(?c1_mass)) AS ?m) .
+  	        BIND(STRAFTER(STR(?iri), "#") AS ?subsystem) .
+    BIND("Subsystem"  AS ?type) .
+
+
+}
+ORDER BY ?iri
