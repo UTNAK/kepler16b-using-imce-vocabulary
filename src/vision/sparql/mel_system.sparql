@@ -5,11 +5,11 @@ PREFIX vim4:		<http://bipm.org/jcgm/vim4#>
 #SELECT DISTINCT ?iri ?subsystem ?c1_id ?c1_name ?c1_type ?systemIri ?mass ?m
 #SELECT DISTINCT ?iri ?system ?c1_id ?c1_name ?c1_type ?mass ?m
 
-SELECT DISTINCT ?iri ?system ?c1_id ?c1_name ?c1_mass ?type ?m
+SELECT DISTINCT ?iri ?subsystem ?c1_id ?c1_name ?c1_mass ?type ?m ?systemIri
 WHERE {
-	?mission a mission:Mission ;
+	?systemIri a mission:Mission ;
 	OPTIONAL {
-		?mission	mission:deploys ?iri .
+		?systemIri	mission:deploys ?iri .
    		OPTIONAL{
       		?iri base:hasIdentifier ?c1_id ;
           			base:hasCanonicalName ?c1_name .
@@ -24,7 +24,7 @@ WHERE {
 #			vim4:hasDoubleNumber ?c1_mass .
 #	}
     BIND((STR(?c1_mass)) AS ?m) .
-      BIND(STRAFTER(STR(?iri), "#") AS ?system) .
+      BIND(STRAFTER(STR(?iri), "#") AS ?subsystem) .
   BIND("System"  AS ?type) .
 
 }

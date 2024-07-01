@@ -1,0 +1,24 @@
+{
+    "component-tree": {
+        "name": "Component Tree",
+        "diagrams": {
+          "all-rows": "components-diagram"
+        },
+        "queries": {
+          "subsystem": "mel_system.sparql",
+          "assembly": "mel.sparql"
+        },
+        "rowMapping": {
+          "id": "subsystem",
+          "name": "System",
+          "labelFormat": "{subsystem}",
+          "subRowMappings": [
+            {
+              "id": "assembly",
+              "name": "Assembly",
+              "labelFormat": "{assembly}"
+            }
+          ]  
+        }
+      }
+}

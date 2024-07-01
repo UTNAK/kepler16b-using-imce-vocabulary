@@ -96,7 +96,12 @@
         "title": "Mass Equipment List(MEL)",
         "type": "table",
         "path": "mel"
-      }
+      },
+      {
+        "title": "Component Tree",
+        "type": "tree",
+        "path": "component-tree"
+      }      
     ]
   }
 ]
