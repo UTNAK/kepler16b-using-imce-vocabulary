@@ -5,6 +5,7 @@ on:
     branches: [ "**" ]
     paths:
       -'src/analysis/**'
+      -'src/oml/**'
   pull_request:
     branches: [ "main" ]
 

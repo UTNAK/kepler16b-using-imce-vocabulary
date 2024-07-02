@@ -1,4 +1,4 @@
-description <http://example.com/tutorial2/description/orbit_analysis_02#> as orbit_analysis_02 {
+description <http://example.com/tutorial2/description/analysis/orbit_analysis_02#> as orbit_analysis_02 {
 
 	extends <http://example.com/tutorial2/description/components#> as components
 
