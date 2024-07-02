@@ -67,10 +67,15 @@
         "path": "parametertable"
       },
       {
-        "title": "Scenario Parameter Table",
+        "title": "Scenario Parameter Table 01",
         "type": "table",
-        "path": "getparameterfromscenario"
-      }    
+        "path": "getparameterfromscenario01"
+      },    
+      {
+        "title": "Scenario Parameter Table 02",
+        "type": "table",
+        "path": "getparameterfromscenario02"
+      } 
     ]
   },
   {

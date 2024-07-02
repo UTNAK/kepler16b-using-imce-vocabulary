@@ -1,0 +1,54 @@
+PREFIX oml: 			<http://opencaesar.io/oml#>
+PREFIX base:        <http://imce.jpl.nasa.gov/foundation/base#>
+PREFIX mission:        <http://imce.jpl.nasa.gov/foundation/mission#>
+PREFIX sa: 	<http://example.com/tutorial2/vocabulary/stateanalysis#>
+PREFIX analysis: <http://imce.jpl.nasa.gov/foundation/analysis#>
+
+SELECT DISTINCT ?scenario ?iri ?scenario_instancename ?statevariable ?value ?type
+#SELECT DISTINCT ?scenario ?iri ?value ?type ?iri2
+WHERE {
+
+##  VALUES ?componentType {sa:simulationScenario}
+##	?scenario a ?componentType .
+
+  VALUES ?scenario {<http://example.com/tutorial2/description/orbit_analysis_02#orbit-analysis-02.scenario>}
+  { 
+    {
+      ?scenario analysis:asserts ?iri.
+      BIND("Objectives" as ?type).
+    }
+    UNION
+    {
+      ?r oml:hasSource ?scenario.
+      ?r oml:hasTarget ?iri.
+      OPTIONAL{
+        ?r sa:assumeInitialStateValue ?value. 
+        BIND("DesignVariables" as ?type).
+      }
+    }
+  }
+  UNION
+  {
+     {?scenario analysis:asserts ?analysisTarget.
+      ?analysisTarget sa:isAffectedBy* ?iri2 .}
+     FILTER NOT EXISTS {
+      {
+        ?scenario analysis:asserts ?analysisTarget.
+        BIND(?analysisTarget as ?iri2).
+      }
+      UNION {
+        ?r oml:hasSource ?scenario.
+         ?r oml:hasTarget ?iri2.
+      }
+    }
+	 BIND("Dependents" as ?type).
+
+	 BIND(?iri2 as ?iri).
+
+
+  }
+
+  BIND(STRAFTER(STR(?scenario), "#") AS ?scenario_instancename) .
+  BIND(STRAFTER(STR(?iri), "#") AS ?statevariable) .
+ }
+ORDER BY ?c1_id

@@ -23,8 +23,6 @@ WHERE {
     }
   }
   
-#  ?c1 rdf:type ?c1_type_iri;
-#  BIND(STRAFTER(STR(?c1_type_iri), "#") AS ?c1_type) .
 	OPTIONAL {
 		?c1 a project:Process ;
 			BIND("Process"  AS ?c1_type) .

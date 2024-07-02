@@ -1,5 +1,5 @@
 {
-  "getparameterfromscenario": {
+  "getparameterfromscenario01": {
     "name": "Scenario",
     "diagrams": {
       "all-rows": "parameter-table"
@@ -11,7 +11,7 @@
       "type" : "type"
     },
     "queries": {
-      "obj-query": "getparameterfromscenario.sparql"
+      "obj-query": "getparameterfromscenario01.sparql"
     },
     "rowMapping": {
       "id": "obj-query",

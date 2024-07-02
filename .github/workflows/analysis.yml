@@ -3,6 +3,8 @@ name: CI/CD
 on:
   push:
     branches: [ "**" ]
+    paths:
+      -'src/analysis/**'
   pull_request:
     branches: [ "main" ]
 
