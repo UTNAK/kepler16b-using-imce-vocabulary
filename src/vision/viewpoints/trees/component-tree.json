@@ -5,8 +5,8 @@
           "all-rows": "components-diagram"
         },
         "queries": {
-          "subsystem": "mel_system.sparql",
-          "assembly": "mel.sparql"
+          "subsystem": "component_tree_parent.sparql",
+          "child": "component_tree_child.sparql"
         },
         "rowMapping": {
           "id": "subsystem",
@@ -14,9 +14,9 @@
           "labelFormat": "{subsystem}",
           "subRowMappings": [
             {
-              "id": "assembly",
+              "id": "child",
               "name": "Assembly",
-              "labelFormat": "{assembly}"
+              "labelFormat": "{child}"
             }
           ]  
         }
