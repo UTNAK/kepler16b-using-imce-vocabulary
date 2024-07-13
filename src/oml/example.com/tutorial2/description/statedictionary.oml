@@ -9,13 +9,13 @@ description <http://example.com/tutorial2/description/statedictionary#> as state
 	uses <http://imce.jpl.nasa.gov/foundation/analysis#> as analysis
 
 	ref instance components:orbiter-spacecraft : analysis:CharacterizedElement [
-		analysis:isConstrainedBy orbiter-spacecraft.delta-v
-		analysis:isConstrainedBy orbiter-spacecraft.initial-orbit
-		analysis:isConstrainedBy orbiter-spacecraft.isp
 		analysis:isConstrainedBy orbiter-spacecraft.mass.dry
-		analysis:isConstrainedBy orbiter-spacecraft.mass.fuel
-		analysis:isConstrainedBy orbiter-spacecraft.mass.wet
+		analysis:isConstrainedBy orbiter-spacecraft.initial-orbit
 		analysis:isConstrainedBy orbiter-spacecraft.target-orbit
+		analysis:isConstrainedBy orbiter-spacecraft.isp
+		analysis:isConstrainedBy orbiter-spacecraft.delta-v
+		analysis:isConstrainedBy orbiter-spacecraft.mass.wet
+		analysis:isConstrainedBy orbiter-spacecraft.mass.fuel
 	]
 
 	instance orbiter-spacecraft.delta-v : sa:StateVariable [

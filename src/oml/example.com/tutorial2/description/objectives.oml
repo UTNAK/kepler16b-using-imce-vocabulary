@@ -29,8 +29,8 @@ description <http://example.com/tutorial2/description/objectives#> as objectives
 	]
 
 	instance characterize-rocky-core : mission:Objective [
-		base:aggregates characterize-rocky-core-density
 		base:aggregates characterize-rocky-core-shape
+		base:aggregates characterize-rocky-core-density
 		base:hasCanonicalName "Characterize the rocky core of Kepler 16b"
 		base:hasIdentifier "O.04"
 	]
