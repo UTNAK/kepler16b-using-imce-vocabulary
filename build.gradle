@@ -225,7 +225,38 @@ task stopKillServer(group:"vision") {
 
     }
 }
+/*
+ * A task for mac to run  dapter_mms2oml.qmd
+ */
+task mms01_mmsQuery(group:"vision") {
+    doLast {
+        def stdout = new ByteArrayOutputStream()
+        exec{
+            // for mac
+            commandLine  "sh", "-c", "quarto render ~/Downloads/cameo_sysml_oml_test/adapter_mmsQuery.qmd"
+            standardOutput = stdout;
+        }
+        println "Output: $stdout"
 
+    }
+}
+
+
+/*
+ * A task for mac to run  dapter_mms2oml.qmd
+ */
+task mms02_mms2oml(group:"vision") {
+    doLast {
+        def stdout = new ByteArrayOutputStream()
+        exec{
+            // for mac
+            commandLine  "sh", "-c", "quarto render ~/Downloads/cameo_sysml_oml_test/adapter_mms2oml.qmd"
+            standardOutput = stdout;
+        }
+        println "Output: $stdout"
+
+    }
+}
 
 /*
  * A task to query the OML dataset in Fuseki
