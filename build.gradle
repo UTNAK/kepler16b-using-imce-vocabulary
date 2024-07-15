@@ -71,8 +71,10 @@ task downloadDependencies(type:io.opencaesar.oml.merge.OmlMergeTask, group:"oml"
  * A task to convert the OML catalog to OWL catalog
  * @seeAlso https://github.com/opencaesar/owl-adapter/blob/master/oml2owl/README.md
  */
-task omlToOwl(type:io.opencaesar.oml2owl.Oml2OwlTask, group:"oml", dependsOn: downloadDependencies) {
-    // OML catalog
+// 07/15/2024 disabled downloadDependencies just for the test of owl:sameAs.
+//task omlToOwl(type:io.opencaesar.oml2owl.Oml2OwlTask, group:"oml", dependsOn: downloadDependencies) {
+task omlToOwl(type:io.opencaesar.oml2owl.Oml2OwlTask, group:"oml") {
+   // OML catalog
     inputCatalogPath = file('catalog.xml')
     // OWL catalog
     outputCatalogPath = file('build/owl/catalog.xml')

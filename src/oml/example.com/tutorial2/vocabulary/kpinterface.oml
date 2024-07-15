@@ -6,6 +6,8 @@ vocabulary <http://example.com/tutorial2/vocabulary/kpinterface#> as kpinterface
 
 	extends <http://imce.jpl.nasa.gov/foundation/mission#> as mission
 
+	extends <http://www.w3.org/2002/07/owl#> as owl
+
 	// kepler-16b model uses "Junction" as a relation entity. IMCE Vocabularies have a "Junction" as a Concept.
 	@rdfs:comment "A Junction joins two or more Interfaces."
 	relation entity Junction [
@@ -27,5 +29,13 @@ vocabulary <http://example.com/tutorial2/vocabulary/kpinterface#> as kpinterface
 	@rdfs:comment "When interfaces presented by components are joined, we infer that the components are connected."
 	rule Junction-infers-Connection [
 		mission:presents(c1, i1) & joins(i1, i2) & mission:isPresentedBy(i2, c2) -> connectsTo(c1, c2)
+	]
+
+	rule mission-infers-pursues [
+	  owl:sameAs(m1, m2) & mission:pursues(m1, o1) -> mission:pursues(m2, o1)
+	]
+
+	rule mission-infers-pursues2 [
+	  owl:sameAs(m1, m2) & mission:pursues(m2, o1) -> mission:pursues(m1, o1)
 	]
 }
