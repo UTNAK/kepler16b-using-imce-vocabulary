@@ -1,0 +1,58 @@
+description <http://example.com/tutorial2//description/workpackages#> as workpackages {
+
+	uses <http://imce.jpl.nasa.gov/foundation/mission#> as mission
+
+	uses <http://imce.jpl.nasa.gov/foundation/project#> as project
+
+	uses <http://imce.jpl.nasa.gov/foundation/base#> as base
+
+	instance crew-deliver-vehicle-mission : mission:Mission [
+		mission:deploys crew-deliver-vehicle
+	]
+
+	instance crew-deliver-service-mission : mission:Mission [
+		mission:deploys crew-deliver-service
+	]
+
+	instance crew-deliver-vehicle-project : project:Project [
+		project:supplies crew-deliver-vehicle-mission
+		project:authorizes crew-deliver-vehicle-procurement
+	]
+
+	instance crew-deliver-service-project : project:Project [
+		project:supplies crew-deliver-service-mission
+		project:authorizes crew-deliver-service-procurement-spacex
+	]
+
+	instance crew-deliver-vehicle : mission:Component
+
+	instance crew-dragon-vehicle : mission:Component
+
+	instance falcon-9-rocket : mission:Component
+
+	instance crew-deliver-service : mission:Component [
+		base:contains crew-dragon-vehicle
+		base:contains falcon-9-rocket
+	]
+
+	instance crew-deliver-vehicle-procurement : project:WorkPackage [
+		project:supplies crew-deliver-vehicle
+	]
+
+	instance crew-deliver-service-procurement-spacex : project:WorkPackage [
+		project:supplies crew-deliver-service
+		project:authorizes crew-dragon-development
+		project:authorizes falcon-9-development
+	]
+
+	instance crew-dragon-development : project:WorkPackage [
+		project:supplies crew-dragon-vehicle
+	]
+
+	instance falcon-9-development : project:WorkPackage [
+		project:supplies falcon-9-rocket
+	]
+	
+	instance delverable-of-vehicle-procurement : project:Deliverable
+	
+}

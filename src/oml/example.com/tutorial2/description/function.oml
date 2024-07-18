@@ -1,0 +1,24 @@
+description <http://example.com/tutorial2/description/function#> as function {
+	extends <http://example.com/tutorial2/description/components#> as components
+
+	uses <http://imce.jpl.nasa.gov/foundation/mission#> as mission
+
+	uses <http://imce.jpl.nasa.gov/foundation/base#> as base
+	
+
+	
+	instance req-observe-magnetic-field : mission:Requirement[
+		mission:specifies observe-magnetic-field-function
+		base:hasIdentifier "REQ-F-01"
+		base:hasDescription "The Orbiter Spacecraft shall observe the magnetic field in its operational environment."
+	]
+	
+	instance observe-magnetic-field : mission:Function
+//	instance transfer-orbit : mission:Function
+
+	relation instance observe-magnetic-field-function : mission:Performs [
+		from components:orbiter-spacecraft
+		to observe-magnetic-field
+	]
+
+}

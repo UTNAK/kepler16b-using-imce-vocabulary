@@ -32,7 +32,9 @@ description <http://example.com/tutorial2/description/components#> as components
 	instance orbiter-ground-data-system : mission:Component [
 		base:hasCanonicalName "Orbiter Ground Data System"
 		base:hasIdentifier "C.03"
+		base:contains DSN
 	]
+	instance DSN : mission:Component
 
 	instance orbiter-guidance-navigation-control-subsystem : mission:Component [
 		base:hasCanonicalName "Orbiter GN&C Subsystem"
