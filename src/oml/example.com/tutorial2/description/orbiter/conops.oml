@@ -1,60 +1,60 @@
 description <http://example.com/tutorial2/description/orbiter/conops#> as conops {
+
 	extends <http://example.com/tutorial2/description/components#> as components
+
+	uses <http://imce.jpl.nasa.gov/foundation/base#>
 
 	uses <http://imce.jpl.nasa.gov/foundation/mission#> as mission
 
-	uses <http://imce.jpl.nasa.gov/foundation/base#> as base
-	
-//	instance req-observe-magnetic-field : mission:Requirement[
-//		mission:specifies observe-magnetic-field-function
-//		base:hasIdentifier "REQ-F-01"
-//		base:hasDescription "The Orbiter Spacecraft shall observe the magnetic field in its operational environment."
-//	]
+	instance Approach : mission:Function [
+		mission:invokes Procimity-Ops-Science-Mapping
+	]
 
-// ConOps Phase or Stage	
-	instance Cruise : mission:Function[
-        mission:invokes Approach
-    ]
-	instance Approach : mission:Function[
-        mission:invokes Procimity-Ops-Science-Mapping
-    ]
-	instance Procimity-Ops-Science-Mapping : mission:Function[
-        mission:invokes SEP-Separation
-    ]
-	instance SEP-Separation : mission:Function[
-        mission:invokes Leg-Deployment
-    ]
-	instance Leg-Deployment : mission:Function[
-        mission:invokes Landing
-    ]
+	instance Cruise : mission:Function [
+		mission:invokes Approach
+	]
+
 	instance Landing : mission:Function
 
+	instance Leg-Deployment : mission:Function [
+		mission:invokes Landing
+	]
 
-//	instance transfer-orbit : mission:Function
+	instance Procimity-Ops-Science-Mapping : mission:Function [
+		mission:invokes SEP-Separation
+	]
+
+	instance SEP-Separation : mission:Function [
+		mission:invokes Leg-Deployment
+	]
+
+	relation instance perform-Approach : mission:Performs [
+		from components:orbiter-spacecraft
+		to Approach
+	]
 
 	relation instance perform-Cruise : mission:Performs [
 		from components:orbiter-spacecraft
 		to Cruise
 	]
-	relation instance perform-Approach : mission:Performs [
-		from components:orbiter-spacecraft
-		to Approach
-	]
-	relation instance perform-Procimity-Ops-Science-Mapping : mission:Performs [
-		from components:orbiter-spacecraft
-		to Procimity-Ops-Science-Mapping
-	]    
-	relation instance perform-SEP-Separation : mission:Performs [
-		from components:orbiter-spacecraft
-		to SEP-Separation
-	]
-	relation instance perform-Leg-Deployment : mission:Performs [
-		from components:orbiter-spacecraft
-		to Leg-Deployment
-	]
+
 	relation instance perform-Landing : mission:Performs [
 		from components:orbiter-spacecraft
 		to Landing
 	]
 
+	relation instance perform-Leg-Deployment : mission:Performs [
+		from components:orbiter-spacecraft
+		to Leg-Deployment
+	]
+
+	relation instance perform-Procimity-Ops-Science-Mapping : mission:Performs [
+		from components:orbiter-spacecraft
+		to Procimity-Ops-Science-Mapping
+	]
+
+	relation instance perform-SEP-Separation : mission:Performs [
+		from components:orbiter-spacecraft
+		to SEP-Separation
+	]
 }
