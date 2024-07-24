@@ -16,5 +16,7 @@ description bundle <http://example.com/tutorial2/description/bundle#> as ^bundle
 
 	includes <http://example.com/tutorial2/description/statedictionary#>
 
+	includes <http://example.com/tutorial2/description/orbiter/conops#>
+
 	uses <http://example.com/tutorial2/vocabulary/bundle#>
 }

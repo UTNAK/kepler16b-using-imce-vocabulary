@@ -1,0 +1,5 @@
+description <http://example.com/tutorial2//description/lander/function#> as function {
+	uses <http://imce.jpl.nasa.gov/foundation/mission#> as mission
+
+	instance lander-landing : mission:Function
+}

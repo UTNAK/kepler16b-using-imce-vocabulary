@@ -4,8 +4,10 @@ description <http://example.com/tutorial2/description/function#> as function {
 	uses <http://imce.jpl.nasa.gov/foundation/mission#> as mission
 
 	uses <http://imce.jpl.nasa.gov/foundation/base#> as base
-	
 
+	extends <http://example.com/tutorial2/description/requirements#> as requirements
+	
+//	ref instance requirements:orbiter-ground-data-system-telemetry-from-spacecraft
 	
 	instance req-observe-magnetic-field : mission:Requirement[
 		mission:specifies observe-magnetic-field-function
