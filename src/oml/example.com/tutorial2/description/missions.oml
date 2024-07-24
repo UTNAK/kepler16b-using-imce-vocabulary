@@ -11,12 +11,12 @@ description <http://example.com/tutorial2/description/missions#> as missions {
 	instance lander : mission:Mission [
 		base:hasCanonicalName "Lander Mission"
 		base:hasIdentifier "M.02"
-		mission:deploys components:lander-ground-data-system
-		mission:deploys components:mission-operations-system
 		mission:deploys components:lander-launch-system
+		mission:deploys components:mission-operations-system
+		mission:deploys components:lander-ground-data-system
 		mission:deploys components:lander-spacecraft
-		mission:pursues objectives:characterize-environment
 		mission:pursues objectives:characterize-atmosphere
+		mission:pursues objectives:characterize-environment
 		mission:pursues objectives:characterize-rocky-core-shape
 	]
 
@@ -27,8 +27,8 @@ description <http://example.com/tutorial2/description/missions#> as missions {
 		mission:deploys components:orbiter-ground-data-system
 		mission:deploys components:mission-operations-system
 		mission:deploys components:orbiter-spacecraft
+		mission:pursues objectives:characterize-atmosphere
 		mission:pursues objectives:characterize-environment
 		mission:pursues objectives:characterize-gravitational-field
-		mission:pursues objectives:characterize-atmosphere
 	]
 }
