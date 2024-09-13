@@ -6,7 +6,7 @@ PREFIX analysis: <http://imce.jpl.nasa.gov/foundation/analysis#>
 
 SELECT DISTINCT ?scenario ?iri ?scenario_instancename ?statevariable ?value ?type
 WHERE {
-  VALUES ?scenario {<http://example.com/tutorial2/description/orbit_analysis_01#orbit-analysis-01.scenario>}
+  VALUES ?scenario {<http://example.com/tutorial2/description/analysis/orbit_analysis_01#orbit-analysis-01.scenario>}
   { 
     {
       ?scenario analysis:asserts ?iri.

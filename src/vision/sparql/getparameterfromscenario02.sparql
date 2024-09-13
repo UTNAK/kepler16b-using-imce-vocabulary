@@ -11,7 +11,7 @@ WHERE {
 ##  VALUES ?componentType {sa:simulationScenario}
 ##	?scenario a ?componentType .
 
-  VALUES ?scenario {<http://example.com/tutorial2/description/orbit_analysis_02#orbit-analysis-02.scenario>}
+  VALUES ?scenario {<http://example.com/tutorial2/description/analysis/orbit_analysis_02#orbit-analysis-02.scenario>}
   { 
     {
       ?scenario analysis:asserts ?iri.
