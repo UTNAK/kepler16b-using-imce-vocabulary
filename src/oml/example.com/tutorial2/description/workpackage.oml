@@ -1,0 +1,15 @@
+description <http://example.com/tutorial2/description/workpackage#> as workpackages {
+
+//	uses <http://imce.jpl.nasa.gov/foundation/base#> as base
+	uses <http://imce.jpl.nasa.gov/foundation/mission#> as mission
+    uses <http://imce.jpl.nasa.gov/foundation/project#> as project
+
+  //  extends <http://example.com/tutorial2/description/components#> as components
+    extends <http://example.com/tutorial2/description/missions#> as missions
+
+    ref instance missions:orbiter : project:Deliverable
+    instance workpackage : project:WorkPackage[
+        project:delivers missions:orbiter
+    ]
+
+}
