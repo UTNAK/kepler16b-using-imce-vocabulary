@@ -96,7 +96,12 @@
         "title": "Component Tree",
         "type": "tree",
         "path": "component-tree"
-      }      
+      },
+      {
+        "title": "Mass Roll Up Demo",
+        "type" : "table",
+        "path" : "mass-roll-up"
+      }
     ]
   }
 ]

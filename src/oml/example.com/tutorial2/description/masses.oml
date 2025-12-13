@@ -96,4 +96,16 @@ description <http://example.com/tutorial2/description/masses#> as masses {
 		vim4:characterizes components:orbiter-thermal-subsystem
 		vim4:hasDoubleNumber 3.07E+02
 	]
+
+	ref instance components:reaction-wheel : mechanical:MechanicalComponent
+	ref instance components:star-sensor : mechanical:MechanicalComponent
+	instance reaction-wheel.mass.magnitude : mechanical:MassMagnitude [
+		vim4:characterizes components:reaction-wheel
+		vim4:hasDoubleNumber 3.00E+01
+	]
+	instance star-sensor.mass.magnitude : mechanical:MassMagnitude [
+		vim4:characterizes components:star-sensor
+		vim4:hasDoubleNumber 1.00E+01
+	]
+
 }

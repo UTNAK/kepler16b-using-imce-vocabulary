@@ -37,8 +37,17 @@ description <http://example.com/tutorial2/description/components#> as components
 	instance orbiter-guidance-navigation-control-subsystem : mission:Component [
 		base:hasCanonicalName "Orbiter GN&C Subsystem"
 		base:hasIdentifier "C.02.06"
+		base:contains reaction-wheel
+		base:contains star-sensor
 	]
-
+	instance star-sensor : mission:Component [
+		base:hasCanonicalName "Star Sensor"
+		base:hasIdentifier "C.02.06.01"
+	]
+	instance reaction-wheel : mission:Component [
+		base:hasCanonicalName "Reaction Wheel"
+		base:hasIdentifier "C.02.06.02"
+	]
 	instance orbiter-harness : mission:Component [
 		base:hasCanonicalName "Orbiter Harness"
 		base:hasIdentifier "C.02.02"

@@ -1,0 +1,96 @@
+
+PREFIX mi:         <http://www.marineinfo.org/ns/ontology#>
+PREFIX base:       <http://imce.jpl.nasa.gov/foundation/base#>
+PREFIX mission:    <http://imce.jpl.nasa.gov/foundation/mission#>
+PREFIX mechanical: <http://example.com/tutorial2/vocabulary/mechanical#>
+PREFIX vim4:       <http://bipm.org/jcgm/vim4#>
+PREFIX project:    <http://imce.jpl.nasa.gov/foundation/project#>
+PREFIX xsd:        <http://www.w3.org/2001/XMLSchema#>
+
+SELECT DISTINCT ?componentiri ?component ?layer
+       (STR(ROUND(xsd:decimal(SUM(?xsdmass)) * 100) / 100) AS ?mass) ?id
+WHERE {
+  VALUES ?rootiri { <http://example.com/tutorial2/description/components#orbiter-spacecraft> }
+
+  # --- Layer 0（rootiri） ---
+  {
+    ?rootiri base:contains ?wplayer1iri .
+    OPTIONAL {
+      ?wplayer1iri base:contains ?wplayer2iri .
+      OPTIONAL { ?wplayer2iri base:contains ?wplayer3iri . }
+    }
+    FILTER(?wplayer1iri != ?rootiri) .
+
+    BIND(IF(!BOUND(?wplayer2iri), ?wplayer1iri, ?wplayer2iri) AS ?iri) .
+    BIND(?rootiri AS ?componentiri) .
+    BIND(STRAFTER(STR(?rootiri), "#") AS ?component) .
+    BIND("0" AS ?layer).
+
+    OPTIONAL {
+      ?c1_mass_mag a mechanical:MassMagnitude ;
+                   vim4:characterizes ?iri ;
+                   vim4:hasDoubleNumber ?xsdmass .
+    }
+        
+    OPTIONAL {
+      ?componentiri base:hasIdentifier ?id.
+    }
+  }
+
+  UNION  
+  
+  # --- Layer 1（wplayer1iri） ---
+  {
+    ?rootiri base:contains ?wplayer1iri .
+    OPTIONAL {
+      ?wplayer1iri base:contains ?wplayer2iri .
+      OPTIONAL { ?wplayer2iri base:contains ?wplayer3iri . }
+    }
+    FILTER(?wplayer1iri != ?rootiri) .
+
+    BIND(IF(!BOUND(?wplayer2iri), ?wplayer1iri, ?wplayer2iri) AS ?iri) .
+    BIND(?wplayer1iri AS ?componentiri) .
+    BIND(STRAFTER(STR(?wplayer1iri), "#") AS ?component) .
+    BIND("1" AS ?layer).
+
+    OPTIONAL {
+      ?c1_mass_mag a mechanical:MassMagnitude ;
+                   vim4:characterizes ?iri ;
+                   vim4:hasDoubleNumber ?xsdmass .
+    }
+    OPTIONAL {
+      ?componentiri base:hasIdentifier ?id.
+    }
+  }
+  
+  UNION
+  
+  # --- Layer 2（wplayer2iri） ---
+  {
+    ?rootiri base:contains ?wplayer1iri.
+    OPTIONAL{
+      ?wplayer1iri base:contains ?wplayer2iri.
+      OPTIONAL{
+        ?wplayer2iri base:contains ?wplayer3iri.
+      }
+    }
+    FILTER(?wplayer1iri != ?rootiri).
+    FILTER(BOUND(?wplayer2iri)).
+
+	BIND(IF(!BOUND(?wplayer2iri), ?wplayer1iri, ?wplayer2iri) AS ?iri).
+    BIND(STRAFTER(STR(?wplayer2iri), "#") AS ?component) .
+  	BIND(?wplayer2iri AS ?componentiri).
+    BIND("2" AS ?layer).
+
+    OPTIONAL{
+        ?c1_mass_mag a mechanical:MassMagnitude;
+                       vim4:characterizes ?iri ;
+                       vim4:hasDoubleNumber ?xsdmass .
+     }
+    OPTIONAL{
+      ?componentiri base:hasIdentifier ?id
+    }
+  }
+}
+GROUP BY ?componentiri ?component ?layer ?id 
+ORDER BY ?id
